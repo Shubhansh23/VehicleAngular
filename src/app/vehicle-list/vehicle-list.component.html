@@ -1,0 +1,10 @@
+<div>
+    <input type="text" [(ngModel)]="searchText" placeholder="Search vehicles">
+  </div>
+  <div *ngFor="let vehicle of filterVehicles()">
+    <p>{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</p>
+    <button (click)="deleteVehicle(vehicle.id)">Delete</button>
+    <button [routerLink]="['/vehicle-detail', vehicle.id]">Edit</button>
+  </div>
+  <button [routerLink]="['/vehicle-detail']">Add New Vehicle</button>
+  

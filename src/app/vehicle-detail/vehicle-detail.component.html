@@ -1,0 +1,89 @@
+<!-- <div>
+    <form (ngSubmit)="saveVehicle()">
+      <label>
+        Make:
+        <input [(ngModel)]="vehicle.make" name="make" required>
+      </label>
+      <label>
+        Model:
+        <input [(ngModel)]="vehicle.model" name="model" required>
+      </label>
+      <label>
+        Year:
+        <input [(ngModel)]="vehicle.year" name="year" type="number" required>
+      </label>
+      <label>
+        VIN:
+        <input [(ngModel)]="vehicle.vin" name="vin" required>
+      </label>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+   -->
+
+
+
+   <div>
+    <form #vehicleForm="ngForm" (ngSubmit)="saveVehicle()">
+      <label>
+        Make:
+        <input [(ngModel)]="vehicle.make" name="make" #make="ngModel" required minlength="2" maxlength="50">
+        <div *ngIf="make.invalid && (make.dirty || make.touched)" class="error">
+          <div *ngIf="make.errors?.['required']">
+            Make is required.
+          </div>
+          <div *ngIf="make.errors?.['minlength']">
+            Make must be at least 2 characters long.
+          </div>
+          <div *ngIf="make.errors?.['maxlength']">
+            Make cannot be more than 50 characters long.
+          </div>
+        </div>
+      </label>
+  
+      <label>
+        Model:
+        <input [(ngModel)]="vehicle.model" name="model" #model="ngModel" required minlength="2" maxlength="50">
+        <div *ngIf="model.invalid && (model.dirty || model.touched)" class="error">
+          <div *ngIf="model.errors?.['required']">
+            Model is required.
+          </div>
+          <div *ngIf="model.errors?.['minlength']">
+            Model must be at least 2 characters long.
+          </div>
+          <div *ngIf="model.errors?.['maxlength']">
+            Model cannot be more than 50 characters long.
+          </div>
+        </div>
+      </label>
+  
+      <label>
+        Year:
+        <input [(ngModel)]="vehicle.year" name="year" type="number" #year="ngModel" required min="1900" max="9999">
+        <div *ngIf="year.invalid && (year.dirty || year.touched)" class="error">
+          <div *ngIf="year.errors?.['required']">
+            Year is required.
+          </div>
+          <div *ngIf="year.errors?.['min'] || year.errors?.['max']">
+            Year must be a valid number between 1900 and 9999.
+          </div>
+        </div>
+      </label>
+  
+      <label>
+        VIN:
+        <input [(ngModel)]="vehicle.vin" name="vin" #vin="ngModel" required pattern="[A-HJ-NPR-Z0-9]{17}">
+        <div *ngIf="vin.invalid && (vin.dirty || vin.touched)" class="error">
+          <div *ngIf="vin.errors?.['required']">
+            VIN is required.
+          </div>
+          <div *ngIf="vin.errors?.['pattern']">
+            VIN must be a valid 17-character alphanumeric string (excluding I, O, Q).
+          </div>
+        </div>
+      </label>
+  
+      <button type="submit">Save</button>
+        </form>
+  </div>
+  
